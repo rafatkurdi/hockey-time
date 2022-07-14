@@ -1,0 +1,118 @@
+<div class="pop-up-wrapper">
+    <div class="pop-up">
+        <img *ngIf="pop_up_action != 'edit' && img != ''" src="/assets/{{img}}.svg" alt="positive_img">
+        <ng-container *ngIf="pop_up_action == 'open'">
+            <h2 class="header">{{pop_up_data.name? pop_up_data.name : (pop_up_data.event | translate)}}</h2>
+            <p class="bold" *ngIf="pop_up_data.start && pop_up_data.end">
+                {{(pop_up_data.start | formatTime) + ' - ' + (pop_up_data.end | formatTime)}}
+            </p>
+            <p class="description">
+                {{pop_up_data.description }}
+            </p>
+            <div class="button big-button" (click)="closePopUp()">
+                {{'close' | translate}}
+            </div>
+        </ng-container>
+        <ng-container *ngIf="pop_up_action == 'delete'">
+            <h2 class="header">{{'really_delete' | translate}}</h2>
+            <div class="button big-button bottom-gap widget-item red-button" (click)="delete()">
+                {{'delete_from_playlist'| translate}}
+            </div>
+            <div class="button big-button grey-button" (click)="closePopUp()">
+                {{'close_without_deleting' | translate}}
+            </div>
+        </ng-container>
+        <ng-container *ngIf="pop_up_action == 'edit'">
+            <div class="headers">
+                <p class="bold">{{'clip_name' | translate}}</p>
+            </div>
+            
+            <input [(ngModel)]="edit_header" class="input clip-name" type="text" maxlength="25">
+
+            <div class="headers">
+                <p class="bold">{{'note' | translate}}</p>
+            </div>
+            <textarea [(ngModel)]="edit_text" class="input clip-text" name="" id="" cols="30" rows="10" maxlength="256"></textarea>
+            <div class="button big-button bottom-gap widget-item " (click)="saveAndExit()">
+                {{'save_and_close' | translate}}
+            </div>
+            <div class="button big-button grey-button" (click)="closePopUp()">
+                {{'close_without_saving' | translate}}
+            </div>
+        </ng-container>
+        <ng-container *ngIf="pop_up_action == 'filter'">
+            <div class="header-filter">
+                <p class="bold">{{'show_clips' | translate}}</p>
+
+                <div class="flex">
+                    <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive('all')}" (click)="selectAction('all')">
+                        <div class="inner-circle" *ngIf="isActive('all')"></div>
+                    </div>
+                    <p>{{'all_by_date' | translate}} ({{events_count.all}})</p>
+                </div>
+                <div class="flex">
+                    <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive('shift')}" (click)="selectAction('shift')">
+                        <div class="inner-circle" *ngIf="isActive('shift')"></div>
+                    </div>
+                    <p [ngClass]="events_count.shift ? '':'disabled'">{{'shifts' | translate}} ({{events_count.shift}})</p>
+                </div>
+                <div class="flex">
+                    <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive('shot')}" (click)="selectAction('shot')">
+                        <div class="inner-circle" *ngIf="isActive('shot')"></div>
+                    </div>
+                    <p [ngClass]="events_count.shot ? '':'disabled'">{{'shots' | translate}} ({{events_count.shot}})</p>
+                </div>
+                <div class="flex">
+                    <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive('goal')}" (click)="selectAction('goal')">
+                        <div class="inner-circle" *ngIf="isActive('goal')"></div>
+                    </div>
+                    <p [ngClass]="events_count.goal ? '':'disabled'">{{'goals_scored' | translate}} ({{events_count.goal}})</p>
+                </div>
+                <div class="flex">
+                    <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive('assist')}" (click)="selectAction('assist')">
+                        <div class="inner-circle" *ngIf="isActive('assist')"></div>
+                    </div>
+                    <p [ngClass]="events_count.assist ? '':'disabled'">{{'assists' | translate}} ({{events_count.assist}})</p>
+                </div>
+                <div class="flex">
+                    <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive('pass')}" (click)="selectAction('pass')">
+                        <div class="inner-circle" *ngIf="isActive('pass')"></div>
+                    </div>
+                    <p [ngClass]="events_count.pass ? '':'disabled'">{{'passes' | translate}} ({{events_count.pass}})</p>
+                </div>
+                <div class="flex">
+                    <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive('faceOff')}" (click)="selectAction('faceOff')">
+                        <div class="inner-circle" *ngIf="isActive('faceOff')"></div>
+                    </div>
+                    <p [ngClass]="events_count.faceOff ? '':'disabled'">{{'faceoffs' | translate}} ({{events_count.faceOff}})</p>
+                </div>
+                <div class="flex">
+                    <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive('positiveParticipation')}" (click)="selectAction('positiveParticipation')">
+                        <div class="inner-circle" *ngIf="isActive('positiveParticipation')"></div>
+                    </div>
+                    <p [ngClass]="events_count.positiveParticipation ? '':'disabled'">{{'positiveParticipations' | translate}} ({{events_count.positiveParticipation}})</p>
+                </div>
+                <div class="flex">
+                    <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive('negativeParticipation')}" (click)="selectAction('negativeParticipation')">
+                        <div class="inner-circle" *ngIf="isActive('negativeParticipation')"></div>
+                    </div>
+                    <p [ngClass]="events_count.negativeParticipation ? '':'disabled'">{{'negativeParticipations' | translate}} ({{events_count.negativeParticipation}})</p>
+                </div>
+            </div>
+            <div class="button big-button" (click)="saveFilters()">
+                {{'show_selected' | translate}}
+            </div>
+        </ng-container>
+
+    </div>
+    <app-loading *ngIf="loading"></app-loading>
+
+    <ng-container>
+        <div class="saved" *ngIf="!loading && requested">
+            <img src="/assets/{{sucessfull? 'positive_big' : 'negative_big'}}.svg" alt="">
+        </div>
+    </ng-container>
+    
+</div>
+
+

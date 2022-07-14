@@ -1,0 +1,26 @@
+<div class="container header">
+    <div [@swipeDownUp] *ngIf="widget === 'home'" class="app-logo">
+        <img src="/assets/icoApplogo.svg" alt="appLogo">
+    </div>
+    <div [@swipeUpDown] *ngIf="widget != 'home'" class="flex hover" (click)="close()">
+        <div class="medium-button">
+            <img src="/assets/backbutton_default.svg" alt="appLogo">
+        </div>
+        <h3 class="h3-margin">
+            {{widget | translate}}
+        </h3>
+    </div>
+   
+    <div class="buttons-wrapper">
+        <div role="button" class="button small-button" (click)="openPlaylist()">
+            Playlist
+        </div>
+        <div role="button" class="button small-button" (click)="openGames()">
+            {{'games' | translate}}
+        </div>
+    </div>
+    
+</div>
+<div class="skeleton">
+    
+</div>

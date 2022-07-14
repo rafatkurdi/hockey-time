@@ -1,0 +1,24 @@
+<div class="container widget-item faceoffs" *ngFor="let faceoff of faceoffs">
+    <div class="flex">
+        <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive(faceoff)}" (click)="selectFaceoffs(faceoff)">
+            <div class="inner-circle" *ngIf="isActive(faceoff)">
+
+            </div>
+        </div>
+        <div class="time gap">
+            {{faceoff.time | formatTime}}
+        </div>
+        <div class="state small-text grey gap">
+            {{faceoff.gameState}}
+        </div>
+    </div>
+    <div class="flex">
+        <div class="hover" (click)="addToPlaylist(faceoff)">
+            <div class="medium-button add_to_playlist" [ngClass]="faceoff.saved ? 'added_to_playlist' : 'add_to_playlist'"></div>
+        </div>
+        <div class="hover" (click)="playOne(faceoff)">
+            <div class="medium-button play_default"></div>
+        </div>
+        
+    </div>
+</div>

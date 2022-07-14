@@ -1,0 +1,24 @@
+<div class="container widget-item shots" *ngFor="let shot of shots">
+    <div class="flex">
+        <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive(shot)}" (click)="selectShot(shot)">
+            <div class="inner-circle" *ngIf="isActive(shot)">
+
+            </div>
+        </div>
+        <div class="time gap">
+            {{shot.time | formatTime}}
+        </div>
+        <div class="state small-text grey gap">
+            {{shot.gameState}}
+        </div>
+    </div>
+    <div class="flex">
+        <div class="hover" (click)="addToPlaylist(shot)">
+            <div class="medium-button add_to_playlist" [ngClass]="shot.saved ? 'added_to_playlist' : 'add_to_playlist'"></div>
+        </div>
+        <div class="hover" (click)="playOne(shot)">
+            <div class="medium-button play_default"></div>
+        </div>
+        
+    </div>
+</div>

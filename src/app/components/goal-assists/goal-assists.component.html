@@ -1,0 +1,24 @@
+<div class="container widget-item assists" *ngFor="let assist of assists">
+    <div class="flex">
+        <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive(assist)}" (click)="selectAssist(assist)">
+            <div class="inner-circle" *ngIf="isActive(assist)">
+
+            </div>
+        </div>
+        <div class="time gap">
+            {{assist.time | formatTime}}
+        </div>
+        <div class="state small-text grey gap">
+            {{assist.gameState}}
+        </div>
+    </div>
+    <div class="flex">
+        <div class="hover" (click)="addToPlaylist(assist)">
+            <div class="medium-button add_to_playlist" [ngClass]="assist.saved ? 'added_to_playlist' : 'add_to_playlist'"></div>
+        </div>
+        <div class="hover" (click)="playOne(assist)">
+            <div class="medium-button play_default"></div>
+        </div>
+        
+    </div>
+</div>

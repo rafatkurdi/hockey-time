@@ -1,0 +1,83 @@
+<div class="container admin">
+    <select class="button big-button"  name="team" id="team" [(ngModel)]="selected_team" (ngModelChange)="setTeamPlyers()">
+        <option value="" disabled>Vyberte tym</option>
+        <option *ngFor="let team of teams" value={{team.shortcut}} >{{team.name}}</option>
+    </select>
+
+    <select 
+        [disabled]="selected_team == ''" class="button big-button" name="team" id="team" 
+        [(ngModel)]="selected_playerId" (ngModelChange)="selectPlayer(selected_playerId)"
+        >
+        <option value="undefined" disabled>Vyberte hrače</option>
+        <option *ngFor="let player of selected_players" value={{player.id}}>{{player.name + " " + player.surname}}</option>
+    </select>
+
+    <button [disabled]="selected_playerId == null" class="button big-button" (click)="simulatePlayer()">
+        Simulate player
+    </button>
+    <button [disabled]="selected_playerId == null" class="button big-button" (click)="loadPlayerData()">
+        Load player data
+    </button>
+    
+
+    <ng-container *ngIf="selected_player_data_loaded">
+        <div class="flex language">
+            <button [ngClass]="language == 'en' ? 'active':''" class="button" (click)="setPlayerLanguage('en')">
+                En
+            </button>
+            <button [ngClass]="language == 'cz' ? 'active':''" class="button" (click)="setPlayerLanguage('cz')">
+                Cz
+            </button>
+        </div>
+        <div *ngIf="selected_player_data.length == 0" style="color: rgb(230, 61, 61);">
+            No available data !
+        </div>
+        <ng-container *ngIf="selected_player_data.length > 0">
+            <div class="player-data-holder" *ngFor="let data of selected_player_data">
+                <p style="overflow: auto;"> 
+                    <span class="bold">
+                        Url: 
+                    </span> 
+                    <a href="{{data.url}}" target="_blank" rel="noopener noreferrer">{{data.url}}</a>
+                </p>
+                <p>
+                    <span class="bold">
+                        Status: 
+                    </span> 
+                    <span [ngStyle]="{'color': data.active ? 'green' : 'red'}">
+                        {{data.active ? "Active" : "Inactive"}}
+                    </span>
+                </p>
+                <p>
+                    <span class="bold">
+                        Created at:
+                    </span>
+                    {{data.createdAt | formatDate: true}}
+                </p>
+                <p>
+                    <span class="bold">
+                        Expired at:
+                    </span>
+                     {{data.expiredAt | formatDate: true}}
+                </p>
+                <div>
+                    <mat-accordion>
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>Visits:</mat-panel-title>
+                                <mat-panel-description>{{data.visits.length}}</mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div *ngFor="let visit of data.visits" style="border-top: 1px solid gray;">
+                                <p>Date: {{visit.date | formatDate: true}}</p>
+                                <p>Ip: {{visit.ip}}</p>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <app-loading *ngIf="loading"></app-loading>
+</div>

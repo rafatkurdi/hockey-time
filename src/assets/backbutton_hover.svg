@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>backbutton_hover</title>
+    <g id="1.-HL---video---mobil" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Komponenty" transform="translate(-284.000000, -340.000000)" fill="#1D5CFF" fill-rule="nonzero">
+            <g id="backbutton_hover" transform="translate(284.000000, 340.000000)">
+                <circle id="check_default" fill-opacity="0.103850251" cx="16" cy="16" r="16"></circle>
+                <path d="M26,16 C26,16.5521004 25.5440685,17.000029 24.9821065,17.000029 L10.558174,17.000029 L16.1848771,22.2762112 C16.5930948,22.6577214 16.6076846,23.293155 16.2193583,23.6902906 C15.8310319,24.0900512 15.186875,24.1043849 14.7799721,23.7241665 L7.31541975,16.72398 C7.11400407,16.5351833 7,16.2734263 7,16 C7,15.7265784 7.11400407,15.4648214 7.31546216,15.2760248 L14.7800145,8.27583828 C15.186875,7.89561982 15.8310319,7.90995353 16.2193583,8.30967251 C16.6076846,8.70551639 16.5931373,9.34094998 16.1849196,9.72379351 L10.558174,14.9999757 L24.9821065,14.9999757 C25.5440685,14.9999757 26,15.4479043 26,16 Z" id="backbutton"></path>
+            </g>
+        </g>
+    </g>
+</svg>

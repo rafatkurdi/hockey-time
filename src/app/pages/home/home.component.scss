@@ -1,0 +1,25 @@
+.home {
+  &.container {
+    margin-bottom: 12px;
+  }
+
+  .disabled {
+    color: #878d96;
+  }
+}
+
+.bottom-gap {
+  padding-bottom: 12px;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+}
+
+.animation {
+  position: absolute;
+  width: -webkit-fill-available;
+  top: 64px;
+}

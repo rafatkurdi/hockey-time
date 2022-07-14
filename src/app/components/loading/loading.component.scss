@@ -1,0 +1,73 @@
+.loading {
+  z-index: 1000;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  bottom: 50%;
+  height: 100px;
+  width: 100px;
+  border-radius: 8px;
+  background-color: rgba(189, 189, 189, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .line {
+    width: 16px;
+    height: 4px;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    background-color: #121619;
+  }
+
+  .circle {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    border: 4px solid #121619;
+
+    .hand {
+      height: 12px;
+      width: 4px;
+      border-radius: 8px;
+      background-color: #121619;
+      box-sizing: border-box;
+      top: 5px;
+      left: 14px;
+      position: absolute;
+      transform-origin: bottom;
+    }
+
+    .point {
+      position: absolute;
+      top: 15px;
+      left: 14px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: #121619;
+    }
+  }
+}
+
+.rotate {
+  animation: rotation 1.2s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

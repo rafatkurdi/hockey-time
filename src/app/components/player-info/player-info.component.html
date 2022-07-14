@@ -1,0 +1,29 @@
+<div class="player-info container">
+    <div class="flex">
+        <div class="team-logo">
+            <img src="/assets/teams-logos/{{player_team}}.png" alt="team-logo">
+        </div>
+        <div class="gap info">
+            <span class="small-text" >
+                <ng-container *ngIf="!no_games">
+                    {{selected_game.homeTeam.shortcut}} - {{selected_game.awayTeam.shortcut}} 
+                    {{selected_game.score.home}}:{{selected_game.score.away}}
+                </ng-container>
+                &nbsp;
+            </span>
+            <span class="h3">
+                {{player_name}}
+            </span>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="gap info" *ngIf="!no_games">
+            <span class="small-text">
+                Icetime
+            </span>
+            <span class="h3">
+                {{player_toi | formatTime}}
+            </span>
+        </div>
+    </div>
+</div>

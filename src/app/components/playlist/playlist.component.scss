@@ -1,0 +1,36 @@
+.record {
+  border-bottom: 1px solid #dde1e6;
+
+  .item-wrapper {
+    width: 100%;
+    .info-wrapper {
+      .header-wrapper {
+        margin-bottom: 2px;
+      }
+
+      .grey {
+        margin: 0 0 4px 0;
+        font-size: 12px;
+      }
+
+      .text {
+        margin: 3px 0;
+      }
+
+      .right-side {
+        margin-left: 22px;
+      }
+    }
+
+    .bottom-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      .left-side {
+        .hover {
+          margin-right: 12px;
+        }
+      }
+    }
+  }
+}

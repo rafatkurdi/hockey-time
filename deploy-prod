@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Startuje kompilace produkcni verze."
+ng build
+echo "Startuje deploy cele aplikace."
+gulp prod

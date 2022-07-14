@@ -1,0 +1,11 @@
+<!-- <div [@loading]  (@loading.done)="rotate()" class="loading">
+    <img [ngClass]="spin ? 'rotate': ''" src="/assets/icoApplogo.svg" alt="icoApp">
+</div> -->
+<div [@loading]  (@loading.done)="rotate()" class="loading">
+    <div class="line"></div>
+    <div class="circle">
+        <div [ngClass]="spin ? 'rotate': ''" class="hand"></div>
+        <div class="point"></div>
+    </div>
+    
+</div>

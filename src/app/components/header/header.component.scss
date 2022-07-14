@@ -1,0 +1,32 @@
+.header {
+  background-color: white;
+  height: 64px;
+  position: absolute;
+  width: -webkit-fill-available;
+  z-index: 10;
+  overflow: hidden;
+  .h3-margin {
+    margin-left: 6px;
+  }
+
+  .buttons-wrapper {
+    display: flex;
+
+    .button:first-of-type {
+      margin-right: 12px;
+    }
+  }
+
+  .app-logo {
+    width: 96px;
+    height: 40px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.skeleton {
+  height: 64px;
+}

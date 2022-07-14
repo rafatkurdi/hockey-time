@@ -1,0 +1,38 @@
+<app-pop-up
+    *ngIf="show_pop_up"
+    (close)="togglePopUp()"
+    (wasDeleted)="reloadPlaylist($event)"
+    [pop_up_data]="record"
+    [pop_up_action]="pop_up_action"
+></app-pop-up>
+<div class="container record widget-item" *ngFor="let record of playlist_filtered">
+    <div class="item-wrapper">
+        <div class="flex info-wrapper">
+            <div class="">
+                <p class="grey">{{record.date}}</p>
+                <p class="text">vs. {{record.enemyTeam}}</p>
+            </div>
+            <div class="right-side">
+                <p class="grey">{{"action" |translate}}</p>
+                <p class="text bold">{{record.name ? record.name : (record.event | translate)}}</p>
+            </div>
+        </div>
+        <div class="bottom-buttons flex">
+            <div class="left-side flex">
+                <div class="hover" (click)="openPopUp(record,'open')">
+                    <div class="medium-button info-icon"></div>
+                </div>
+                <div class="hover" (click)="openPopUp(record,'edit')">
+                    <div class="medium-button edit-icon"></div>
+                </div>
+                <div class="hover" (click)="openPopUp(record,'delete')">
+                    <div class="medium-button delete-icon"></div>
+                </div>
+            </div>
+    
+            <div class="hover" (click)="playOne(record)">
+                <div class="medium-button play_default"></div>
+            </div>
+        </div>
+    </div>
+</div>

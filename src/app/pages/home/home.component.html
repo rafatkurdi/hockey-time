@@ -1,0 +1,364 @@
+<div class="sticky">
+    <app-header
+    [show_games]="show_games"
+    [widget]="widget"
+    (showGames)="showGames($event)"
+    (showPlaylist)="showPlaylist($event)"
+    (backToHome)="closeWidget()"
+    ></app-header>
+    <!-- Games list -->
+    <div class="animation" [@showHide] *ngIf="show_games">
+        <app-game
+            [games]="games"
+            [selected_game]="selected_game"
+            (onSelectedGame)="onGameSelect($event)"
+        ></app-game>
+    </div>
+
+    <!-- Video -->
+    <div *ngIf="widget != 'home'">
+        <app-video 
+            [widget]="widget"
+            [set_play]="set_videos"
+            [to_play]="video_to_play"
+            (filtered)="setFiltered($event)"
+        ></app-video>
+    </div>
+</div>
+<div *ngIf="widget != 'home'" [ngStyle]="{'height': widget == 'playlist' ? '343px' : '284px'}" ></div>
+    <!-- Player & game info -->
+    <div *ngIf="(!loading || widget != 'home') && widget != 'playlist'">
+        <app-player-info
+            [no_games]="no_games"
+            [selected_game]="selected_game"
+            [player_name]="player_name"
+            [player_toi]="player_toi"
+            [player_team]="player_team"
+        ></app-player-info>
+    </div>
+<!-- Home screen -->
+<!-- PLAYERS -->
+<ng-container *ngIf="!no_games && !loading && shifts.length">
+    <div class="widget-item" [@swipeRightLeft] *ngIf="widget === 'home'" >
+        <!-- All shifts -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{shifts.length > 0 ? 'icoShifts_active' : 'icoShifts_disabled'}}.svg" alt="icoShifts">
+                <p class="gap" [ngClass]="{'disabled': (shifts.length == 0)}" >{{'all_shifts' | translate}} ({{shifts.length}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('all_shifts', shifts.length)">
+                <div class="medium-button next_default"></div>
+            </div>
+        </div>
+        <!-- Shots -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{shots.length > 0 ? 'icoShots_active' : 'icoShots_disabled'}}.svg" alt="icoShots">
+                <p class="gap" [ngClass]="{'disabled': (shots.length == 0)}">{{'shots' | translate}} ({{shots.length}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('shots',shots.length)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': shots.length == 0, 'no-pointer': shots?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- Goals -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{goals.length > 0 ? 'icoGoals_active' : 'icoGoals_disabled'}}.svg" alt="icoGoal">
+                <p class="gap" [ngClass]="{'disabled': (goals.length == 0)}">{{'goal_scored' | translate}} ({{goals.length}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('goal_scored',goals.length)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': goals.length == 0, 'no-pointer': goals?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- Goal assists -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{assists.length > 0 ? 'icoGoalAssists_active' : 'icoGaolAssists_disabled'}}.svg" alt="icoAssist">
+                <p class="gap" [ngClass]="{'disabled': (assists.length == 0)}">{{'goal_assists' | translate}} ({{assists.length}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('goal_assists',assists.length)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': assists.length == 0, 'no-pointer': assists?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- Shots assists -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{passes.length > 0 ? 'icoAssists_active' : 'icoAssists_disabled'}}.svg" alt="icoAssist">
+                <p class="gap" [ngClass]="{'disabled': (passes.length == 0)}">{{"shot_assists" | translate}} ({{passes.length}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('shot_assists',passes.length)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': passes.length == 0, 'no-pointer': passes?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- FaceOffs -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{faceoffs.length > 0 ? 'icoFaceoff_active' : 'icoFaceoff_disabled'}}.svg" alt="icoAssist">
+                <p class="gap" [ngClass]="{'disabled': (faceoffs.length == 0)}">{{'faceoffs' | translate}} ({{faceoffs.length}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('faceoffs',faceoffs.length)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': faceoffs.length == 0, 'no-pointer': faceoffs?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- + / - participations -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{participations.length > 0 ? 'icoPlusminus_active' : 'icoPlusminus_disabled'}}.svg" alt="icoAssist">
+                <p class="gap" [ngClass]="{'disabled': (participations.length == 0)}">{{'plus_minus_participations' | translate}} ({{participations.length}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('plus_minus_participations',participations.length)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': participations.length == 0, 'no-pointer': participations?.length == 0}"></div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<!--GOALKEEPERS-->
+<ng-container *ngIf="!no_games && !loading && !shifts.length">
+    <div class="widget-item" [@swipeRightLeft] *ngIf="widget === 'home'" >
+        <!-- Goals against -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{goalsAgainst?.length ? 'icoGoalin_active' : 'icoGoalin_disabled'}}.svg" alt="icoGoalin">
+                <p class="gap" [ngClass]="{'disabled': (goalsAgainst?.length == 0)}" >{{'goals_against' | translate}} ({{goalsAgainst?.length?? 0}})</p>
+            </div>
+                <div class="hover" (click)="activeWidget('goals_against', goalsAgainst?.length?? 0)">
+                    <div class="medium-button next_default" [ngClass]="{'disabled': goalsAgainst?.length == 0, 'no-pointer': goalsAgainst?.length == 0}"></div>
+                </div>
+        </div>
+        <!-- Saves -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{saves?.length ? 'icoShotsall_active' : 'icoShotsall_disabled'}}.svg" alt="icoShotsall">
+                <p class="gap" [ngClass]="{'disabled': (saves?.length == 0)}" >{{'saves_goalkeeper' | translate}} ({{saves?.length?? 0}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('saves_goalkeeper', saves?.length?? 0)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': saves?.length == 0, 'no-pointer': saves?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- Slot Shots Saved -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{slotShotsSaved?.length ? 'icoShotsslot_active' : 'icoShotsslot_disabled'}}.svg" alt="icoShotsslot">
+                <p class="gap" [ngClass]="{'disabled': (slotShotsSaved?.length == 0)}" >{{'slot_shots_saved_goalkeeper' | translate}} ({{slotShotsSaved?.length?? 0}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('slot_shots_saved_goalkeeper', slotShotsSaved?.length?? 0)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': slotShotsSaved?.length == 0, 'no-pointer': slotShotsSaved?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- Cross Ice Pass Shots Saved -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{crossIcePassShotsSaved?.length ? 'icoCross_active' : 'icoCross_disabled'}}.svg" alt="icoCross">
+                <p class="gap" [ngClass]="{'disabled': (crossIcePassShotsSaved?.length == 0)}" >{{'cross_ice_pass_sots_saved_goalkeeper' | translate}} ({{crossIcePassShotsSaved?.length?? 0}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('cross_ice_pass_sots_saved_goalkeeper', crossIcePassShotsSaved?.length?? 0)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': crossIcePassShotsSaved?.length == 0, 'no-pointer': crossIcePassShotsSaved?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- Inner slot shots saved -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{innerSlotShotsSaved?.length ? 'icoShotsinnerslot_active' : 'icoShotsinnerslot_disabled'}}.svg" alt="icoShotsinnerslot">
+                <p class="gap" [ngClass]="{'disabled': (innerSlotShotsSaved?.length == 0)}" >{{'inner_slot_shots_saved' | translate}} ({{innerSlotShotsSaved?.length?? 0}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('inner_slot_shots_saved', innerSlotShotsSaved?.length?? 0)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': innerSlotShotsSaved?.length == 0, 'no-pointer': innerSlotShotsSaved?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- Odd-Man-Rushes saved -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{oddManRushesSaved?.length ? 'ico2on1_active' : 'ico2on1_disabled'}}.svg" alt="ico2on1">
+                <p class="gap" [ngClass]="{'disabled': (oddManRushesSaved?.length == 0)}" >{{'odd_man_rushes_saved' | translate}} ({{oddManRushesSaved?.length?? 0}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('odd_man_rushes_saved', oddManRushesSaved?.length?? 0)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': oddManRushesSaved?.length == 0, 'no-pointer': oddManRushesSaved?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- One-timers saved -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{oneTimersSaved?.length ? 'icoOnetimer_active' : 'icoOnetimer_disabled'}}.svg" alt="icoOnetimer">
+                <p class="gap" [ngClass]="{'disabled': (oneTimersSaved?.length == 0)}" >{{'one_timers_saved' | translate}} ({{oneTimersSaved?.length?? 0}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('one_timers_saved', oneTimersSaved?.length?? 0)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': oneTimersSaved?.length == 0, 'no-pointer': oneTimersSaved?.length == 0}"></div>
+            </div>
+        </div>
+        <!-- Rebounds saved -->
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{reboundsSaved?.length ? 'icoRebound_active' : 'icoRebound_disabled'}}.svg" alt="icoRebound">
+                <p class="gap" [ngClass]="{'disabled': (reboundsSaved?.length == 0)}" >{{'rebounds_saved' | translate}} ({{reboundsSaved?.length?? 0}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('rebounds_saved', reboundsSaved?.length?? 0)">
+                <div class="medium-button next_default" [ngClass]="{'disabled': reboundsSaved?.length == 0, 'no-pointer': reboundsSaved?.length == 0}"></div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<!-- Shifts widget -->
+<div class="bottom-gap" [@swipeLeftRight] *ngIf="widget === 'all_shifts'">
+    <app-all-shifts
+        [shifts]="shifts"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playShift)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-all-shifts>
+</div>
+
+<!-- Shots widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'shots'">
+    <app-shots
+        [shots]="shots"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playShot)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-shots>
+</div>
+
+<!-- Goals widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'goal_scored'">
+    <app-goals
+        [goals]="goals"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playGoal)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-goals>
+</div>
+
+<!-- Goals assists widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'goal_assists'">
+    <app-goal-assists
+        [assists]="assists"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playGoalAssist)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-goal-assists>
+</div>
+
+<!-- Shots assists widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'shot_assists'">
+    <app-shot-assists
+        [passes]="passes"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playShotAssist)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-shot-assists>
+</div>
+
+<!-- FaceOffs widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'faceoffs'">
+    <app-faceoffs
+        [faceoffs]="faceoffs"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playFaceOffs)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-faceoffs>
+</div>
+
+<!-- Participations widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'plus_minus_participations'">
+    <app-positive-negative-participations
+        [participations]="participations"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playParticipation)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-positive-negative-participations>
+</div>
+
+<!-- Goals against widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'goals_against'">
+    <app-goal-against
+        [goals]="goalsAgainst"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playGoal)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-goal-against>
+</div>
+
+<!-- Goals against widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'saves_goalkeeper'">
+    <app-saves
+        [goals]="saves"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playSaves)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-saves>
+</div>
+
+<!-- Slot shots saved widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'slot_shots_saved_goalkeeper'">
+    <app-slot-shots-saved
+        [goals]="slotShotsSaved"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playSlotShotsSaved)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-slot-shots-saved>
+</div>
+
+<!-- Cross Ice Pass Shots Saved widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'cross_ice_pass_sots_saved_goalkeeper'">
+    <app-cross-ice-pass-shot-saved
+        [goals]="crossIcePassShotsSaved"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playCrossIcePassShotsSaved)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-cross-ice-pass-shot-saved>
+</div>
+
+<!-- Inner Slot Shots Saved widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'inner_slot_shots_saved'">
+    <app-inner-slot-shot-saved
+        [goals]="innerSlotShotsSaved"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playInnerSlotShotSaved)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-inner-slot-shot-saved>
+</div>
+
+<!-- Odd Man Rushes Saved widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'odd_man_rushes_saved'">
+    <app-odd-man-rushes-saved
+        [goals]="oddManRushesSaved"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playOddManRushesSaved)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-odd-man-rushes-saved>
+</div>
+
+<!-- One Timers Saved widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'one_timers_saved'">
+    <app-one-timer-saved
+        [goals]="oneTimersSaved"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playOneTimersSaved)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-one-timer-saved>
+</div>
+
+<!-- One Rebounds Saved widget -->
+<div [@swipeLeftRight] *ngIf="widget === 'rebounds_saved'">
+    <app-rebounds-saved
+        [goals]="reboundsSaved"
+        (saveToPlaylist)="saveToPlaylist($event)"
+        (playReboundsSaved)="playVideo($event)"
+        (setSelected)="setVideo($event)"
+    ></app-rebounds-saved>
+</div>
+
+<!-- Playlist -->
+<div [@swipeLeftRight] *ngIf="widget === 'playlist'">
+    <app-playlist
+    [filtered]="filtered"
+    (playPlaylist)="playVideo($event)"
+    ></app-playlist>
+</div>
+
+<div class="container center" *ngIf="no_games && !loading && widget == 'home'">
+    <h3>{{"no_games_played" | translate}}</h3>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>

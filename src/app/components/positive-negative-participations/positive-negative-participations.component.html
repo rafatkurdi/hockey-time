@@ -1,0 +1,29 @@
+<div class="container widget-item participation" *ngFor="let participation of participations">
+    <div class="flex">
+        <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive(participation)}" (click)="selectParticipations(participation)">
+            <div class="inner-circle" *ngIf="isActive(participation)">
+
+            </div>
+        </div>
+        <div class="time gap">
+            {{participation.time | formatTime}}
+        </div>
+        <div class="state small-text grey gap">
+            {{participation.gameState}}
+        </div>
+        <div class="gap">
+            <div class="mark" [ngClass]="participation.positive? 'mark-green':'mark-red'">
+                {{participation.positive? "+1" : "-1"}}
+            </div>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="hover" (click)="addToPlaylist(participation)">
+            <div class="medium-button add_to_playlist" [ngClass]="participation.saved ? 'added_to_playlist' : 'add_to_playlist'"></div>
+        </div>
+        <div class="hover" (click)="playOne(participation)">
+            <div class="medium-button play_default"></div>
+        </div>
+    </div>
+</div>
+

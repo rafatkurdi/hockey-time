@@ -1,0 +1,22 @@
+<div class="container login">
+    <img *ngIf="!logged" [@goYOut]="{value:'',params:{delay:0, from:'10px', to:'-100vh'}}" src="assets/icoApplogo.svg" alt="icona-default">
+
+    <span *ngIf="!logged" [@goYOut]="{value:'',params:{delay:50, from:'10px', to:'-100vh'}}" class="h2" >
+        Admin login
+    </span>
+
+    <input *ngIf="!logged" [@goYOut]="{value:'',params:{delay:100, from:'15px', to:'-100vh'}}" class="login-input" type="text" placeholder="E-mail" [(ngModel)]="email" required>
+
+    <input *ngIf="!logged" [@goYOut]="{value:'',params:{delay:200, from:'15px', to:'-100vh'}}" (keydown.enter)="adminLogin()"  class="login-input" type="password" placeholder="Password" [(ngModel)]="secter" required>
+
+    <button *ngIf="!logged" [@goYOut]="{value:'',params:{delay:300, from:'15px', to:'-100vh'}}" (@goYOut.done)="login()" class="button big-button" (click)="adminLogin()">
+        Login
+    </button>
+    
+    <div *ngIf="!logged" [@goYOut]="{value:'',params:{delay:100, from:'-20px', to:'20vh'}}"  class="micro-text footer">
+        <span>
+            Made with ❤ by eSports.cz
+        </span>
+    </div>
+    <app-loading *ngIf="loading"></app-loading>
+</div>

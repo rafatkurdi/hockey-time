@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>play_disabled</title>
+    <g id="1.-HL---video---mobil" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Komponenty" transform="translate(-380.000000, -290.000000)" fill-rule="nonzero">
+            <g id="play_disabled" transform="translate(380.000000, 290.000000)">
+                <rect id="Rectangle" stroke="#C1C7CD" stroke-width="2" x="1" y="1" width="30" height="30" rx="8"></rect>
+                <path d="M23.2366472,14.6962963 L12.2580897,8.20584795 C11.3660819,7.67875244 10,8.19025341 10,9.49395712 L10,22.4717349 C10,23.6413255 11.2693957,24.3461988 12.2580897,23.7598441 L23.2366472,17.2725146 C24.2159844,16.6955166 24.2191033,15.2732943 23.2366472,14.6962963 Z" id="Path" fill="#C1C7CD"></path>
+            </g>
+        </g>
+    </g>
+</svg>

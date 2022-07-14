@@ -1,0 +1,34 @@
+
+<div class="main-wrapper">
+    <div class="container game hover" *ngFor="let game of games" (click)="setGame(game)">
+        <div class="game-wrapper" [ngClass]="{selected: game.id == selected_game.id}">
+            <img class="logo" src="/assets/teams-logos/{{ game.homeTeam.id}}.png" alt="team-logo">
+    
+            <div class="info">
+                <div class="small">
+                    <span class="micro-text">
+                        {{game.date |formatDate: false}}
+                    </span>
+                </div>
+                <div class="medium">
+                    <span class="h3">
+                        {{game.homeTeam.shortcut}} - {{game.awayTeam.shortcut}}
+                    </span>
+                </div>
+                <div class="big">
+                    <span  class="h2">
+                        {{game.score.home}}:{{game.score.away}}
+                    </span>
+                </div>
+            </div>
+    
+            <img class="logo" src="/assets/teams-logos/{{ game.awayTeam.id}}.png" alt="team-logo">
+        </div>
+    </div>
+    <div class="container center" *ngIf="no_games">
+        <h3>{{"no_games_played" | translate}}</h3>
+    </div>
+</div>
+
+
+
