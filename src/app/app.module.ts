@@ -38,6 +38,7 @@ import { InnerSlotShotSavedComponent } from './components/inner-slot-shot-saved/
 import { OddManRushesSavedComponent } from './components/odd-man-rushes-saved/odd-man-rushes-saved.component';
 import { OneTimerSavedComponent } from './components/one-timer-saved/one-timer-saved.component';
 import { ReboundsSavedComponent } from './components/rebounds-saved/rebounds-saved.component';
+import { VideoCoachNotesComponent } from './components/video-coach-notes/video-coach-notes.component';
 
 const appRoutes: Routes = [
   { path: "", component: LoginComponent },
@@ -78,6 +79,7 @@ const appRoutes: Routes = [
     OddManRushesSavedComponent,
     OneTimerSavedComponent,
     ReboundsSavedComponent,
+    VideoCoachNotesComponent,
   ],
   imports: [
     BrowserModule,

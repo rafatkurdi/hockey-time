@@ -38,8 +38,18 @@
     </div>
 <!-- Home screen -->
 <!-- PLAYERS -->
-<ng-container *ngIf="!no_games && !loading && shifts.length">
+<ng-container *ngIf="!loading ">
     <div class="widget-item" [@swipeRightLeft] *ngIf="widget === 'home'" >
+        <div class="container home">
+            <div class="flex">
+                <img src="/assets/{{VideoCoachNotes.length > 0 ? 'icoShifts_active' : 'icoShifts_disabled'}}.svg" alt="icoShifts">
+                <p class="gap" [ngClass]="{'disabled': (VideoCoachNotes.length == 0)}" >{{'video_coach_notes' | translate}} ({{VideoCoachNotes.length}})</p>
+            </div>
+            <div class="hover" (click)="activeWidget('video_coach_notes', 1)">
+                <div class="medium-button next_default"></div>
+            </div>
+        </div>
+        <!-- Shots -->
         <!-- All shifts -->
         <div class="container home">
             <div class="flex">
@@ -47,7 +57,7 @@
                 <p class="gap" [ngClass]="{'disabled': (shifts.length == 0)}" >{{'all_shifts' | translate}} ({{shifts.length}})</p>
             </div>
             <div class="hover" (click)="activeWidget('all_shifts', shifts.length)">
-                <div class="medium-button next_default"></div>
+                <div class="medium-button next_default" [ngClass]="{'disabled': shifts.length == 0, 'no-pointer': shifts?.length == 0}" ></div>
             </div>
         </div>
         <!-- Shots -->
@@ -198,6 +208,18 @@
         </div>
     </div>
 </ng-container>
+
+
+<!-- Shifts widget -->
+<div class="bottom-gap" [@swipeLeftRight] *ngIf="widget === 'video_coach_notes'">
+    <app-video-coach-notes
+    [videoCoachNotes]="VideoCoachNotes"
+    (saveToPlaylist)="saveToPlaylist($event)"
+    (playVideo)="playVideo($event)"
+    (setSelected)="setVideo($event)"
+    ></app-video-coach-notes>
+</div>
+
 
 <!-- Shifts widget -->
 <div class="bottom-gap" [@swipeLeftRight] *ngIf="widget === 'all_shifts'">

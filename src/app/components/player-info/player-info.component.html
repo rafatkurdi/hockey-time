@@ -5,7 +5,7 @@
         </div>
         <div class="gap info">
             <span class="small-text" >
-                <ng-container *ngIf="!no_games">
+                <ng-container *ngIf="!no_games && selected_game!= null">
                     {{selected_game.homeTeam.shortcut}} - {{selected_game.awayTeam.shortcut}} 
                     {{selected_game.score.home}}:{{selected_game.score.away}}
                 </ng-container>

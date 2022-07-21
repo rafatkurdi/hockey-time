@@ -23,6 +23,11 @@ export class TranslatePipe implements PipeTransform {
       en: string;
     }[] = [
       {
+        key: "video_coach_notes",
+        cz: "Poznámky videokouče",
+        en: "Video coach notes",
+      },
+      {
         key: "all_shifts",
         cz: "Všechna střídání",
         en: "All shifts",

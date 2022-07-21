@@ -15,6 +15,7 @@ import {
   Shift,
   Shot,
   VideToPlay,
+  VideoCoachNotes
 } from "src/app/interface/interface";
 import { FormatDatePipe } from "src/app/pipes/format-date.pipe";
 import { DefaultService } from "src/app/services/default.service";
@@ -54,6 +55,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   selected_game: OverviewGamesData;
   match_events: matchEvents;
   match_goalkeeper_events: matchEventsGoalKeeper;
+  VideoCoachNotes: VideoCoachNotes[] = [];
   shifts: Shift[] = [];
   shots: Shot[] = [];
   goals: Goal[] = [];
@@ -106,6 +108,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       : (this.getOverview(), this.getPlaylist());
 
     this.getTeams();
+
+    this.getVideoCoachVideoClips();
+
   }
 
   ngAfterViewInit(): void {
@@ -269,6 +274,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
           );
           this.cd.detectChanges();
         }
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error("Bad API request: aS-gL", err);
+        alert("Bad API request: aS-gL");
+      },
+    });
+  }
+
+  getVideoCoachVideoClips() {
+    this.adminService.getVideoCoachVideoClips(this.player_id)?.subscribe({
+      next: (recivedData) => {
+        this.VideoCoachNotes = recivedData
       },
       error: (err) => {
         this.loading = false;

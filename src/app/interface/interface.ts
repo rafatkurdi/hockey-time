@@ -244,6 +244,21 @@ export interface Shift {
   saved?: boolean;
 }
 
+export interface VideoCoachNotes {
+  date: string;
+  description: string;
+  endVideoTime: number;
+  id: string;
+  matchId: string;
+  name: string;
+  time: number;
+  type: string;
+  videoId: string;
+  videoTime: number;
+  saved?: boolean;
+}
+
+
 export interface Shot {
   time: number;
   realTime: string;

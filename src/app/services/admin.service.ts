@@ -99,6 +99,18 @@ export class AdminService {
     }
   }
 
+  getVideoCoachVideoClips(registrationNumber: string) {
+    const headers = new HttpHeaders({
+      //Authorization: "Bearer " + this.token,
+      Authorization: "Bearer " + "936de4d7723c27fab23a10303fda9f2fade0e1cb",
+    });
+    const options = { headers };
+      return this.http.get<any>(
+        "https://logiqplayer-test.statistics.datasport.cz" + "/api/videoClip",
+        options
+      );
+  }
+
   //Will load all selected player tokens infos
   getPlayerAcces(registrationNumber: string | undefined) {
     const headers = new HttpHeaders({ Authorization: "Bearer " + this.token });
