@@ -121,6 +121,7 @@ export class VideoCoachNotesComponent implements OnInit {
       this.set_video.push({
         videoTime: shitf.videoTime - 5,
         videoEndTime: shitf.endVideoTime + 5,
+        videoId : shitf.videoId,
         selected: false,
       });
     });
@@ -140,6 +141,7 @@ export class VideoCoachNotesComponent implements OnInit {
       {
         videoTime: videoCoachNote.videoTime - 5,
         videoEndTime: videoCoachNote.endVideoTime + 5,
+        videoId : videoCoachNote.videoId
       },
     ];
     this.playVideo.emit(video);

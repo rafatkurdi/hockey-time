@@ -6,15 +6,16 @@
             </div>
         </div>
         <div class="time gap">
-            {{videoCoachNote.videoTime | formatTime}} - {{videoCoachNote.endVideoTime | formatTime}}
+            <div> {{videoCoachNote.videoTime | formatTime}} - {{videoCoachNote.endVideoTime | formatTime}} </div>
+            <div class="video-notes"> {{videoCoachNote.name }} </div>
         </div>
         <!-- <div class="state small-text grey gap">
             {{shift.gameState}}
         </div> -->
     </div>
     <div class="flex">
-        <div class="hover" (click)="addToPlaylist(videoCoachNote)">
-            <div class="medium-button add_to_playlist" [ngClass]="videoCoachNote.saved ? 'added_to_playlist' : 'add_to_playlist'"></div>
+        <div class="hover">
+            <div class="medium-button" [ngClass]="videoCoachNote.type"></div>
         </div>
         <div class="hover" (click)="playOne(videoCoachNote)">
             <div class="medium-button play_default"></div>

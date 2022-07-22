@@ -46,7 +46,7 @@
                 <p class="gap" [ngClass]="{'disabled': (VideoCoachNotes.length == 0)}" >{{'video_coach_notes' | translate}} ({{VideoCoachNotes.length}})</p>
             </div>
             <div class="hover" (click)="activeWidget('video_coach_notes', 1)">
-                <div class="medium-button next_default"></div>
+                <div class="medium-button next_default"  [ngClass]="{'disabled': VideoCoachNotes.length == 0, 'no-pointer': VideoCoachNotes?.length == 0}" ></div>
             </div>
         </div>
         <!-- Shots -->

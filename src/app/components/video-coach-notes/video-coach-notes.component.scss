@@ -1,0 +1,27 @@
+.thumbs-up {
+    background-image: url(/assets/positive_big.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 5px;
+}
+
+
+.thumbs-down {
+    background-image: url(/assets/negative_big.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 5px;
+}
+
+
+.neutral {
+    background-image: url(/assets/neutral_big.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 5px;
+}
+
+
+.video-notes{
+    font-weight: 700;
+}
