@@ -15,7 +15,7 @@
     </div>
     <div class="flex">
         <div class="hover">
-            <div class="medium-button" [ngClass]="videoCoachNote.type"></div>
+            <div class="medium-button" [ngClass]="videoCoachNote.type"   (click)="openNotesPopup(videoCoachNote)"></div>
         </div>
         <div class="hover" (click)="playOne(videoCoachNote)">
             <div class="medium-button play_default"></div>
@@ -23,3 +23,11 @@
         
     </div>
 </div>
+
+
+<app-pop-up
+    *ngIf="show_pop_up"
+    (close)="togglePopUp()"
+    [pop_up_data]="notes_popup_data"
+    pop_up_action="VideoCoachNote"
+></app-pop-up>

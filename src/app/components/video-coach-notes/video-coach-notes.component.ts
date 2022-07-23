@@ -6,6 +6,7 @@ import {
   EventEmitter,
   ChangeDetectorRef,
 } from "@angular/core";
+import { asyncScheduler } from "rxjs";
 import { Playlist,VideoCoachNotes, VideToPlay } from "src/app/interface/interface";
 
 @Component({
@@ -22,7 +23,8 @@ export class VideoCoachNotesComponent implements OnInit {
 
   set_video: VideToPlay[] = [];
   selected_videoCoachNotes: VideoCoachNotes[] = [];
-
+  show_pop_up: boolean = false;
+  notes_popup_data : any;
   constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -145,6 +147,21 @@ export class VideoCoachNotesComponent implements OnInit {
       },
     ];
     this.playVideo.emit(video);
+  }
+
+
+  togglePopUp() {
+    if (this.show_pop_up) {
+      this.show_pop_up = false;
+    } else if (!this.show_pop_up) {
+      this.show_pop_up = true;
+    }
+  }
+
+  openNotesPopup(  item : any  ){
+    console.log("item", item);
+    this.notes_popup_data = item;
+    this.togglePopUp();
   }
 
 }

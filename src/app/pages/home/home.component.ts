@@ -512,7 +512,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   setVideo(event: VideToPlay[]) {
     this.set_videos = [];
     event.forEach((video) => {
-      video.videoId = this.video_id;
+      if(this.video_id)
+          video.videoId = this.video_id;
     });
     console.log("Event", event);
     this.set_videos = event;

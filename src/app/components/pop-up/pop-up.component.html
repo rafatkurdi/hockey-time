@@ -103,7 +103,20 @@
                 {{'show_selected' | translate}}
             </div>
         </ng-container>
+        <ng-container *ngIf="pop_up_action == 'VideoCoachNote'">
+            <div class="videoCoachNote">
+                <div class="medium-button" [ngClass]="pop_up_data.type" ></div>
+                <div class="headers">
+                    <p class="bold"> {{pop_up_data.name}}</p>
+                    <div class="bold video-time-range">  {{pop_up_data.videoTime | formatTime }} - {{pop_up_data.endVideoTime | formatTime}} </div>
+                </div>
+                <div class="description">  {{pop_up_data.description}} </div>
+                <div class="button big-button" (click)="closePopUp()">
+                    {{'close' | translate}}
+                </div>
 
+            </div>
+        </ng-container>
     </div>
     <app-loading *ngIf="loading"></app-loading>
 

@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
             console.log(recivedData);
             this.loading = false;
             this.logged = true;
+            this.temporaryLoginForVideo();
           },
           error: (err) => {
             this.loading = false;
@@ -57,6 +58,22 @@ export class LoginComponent implements OnInit, AfterViewInit {
           },
         });
     }
+  }
+
+  temporaryLoginForVideo(): void {
+    this.defaultService
+    .getTokenTemporary({ client_id: "0820221996", client_secret: "62d6afbb881ee"})
+    .subscribe({
+      next: (recivedData) => {
+        console.log( "Temporary user logged in :",recivedData);
+        sessionStorage.setItem("tempUser",  recivedData.access_token);
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error("getToken failure", err);
+        alert("Wrong name or password");
+      },
+    });
   }
 
   private setUserData(recived_data: any): void {

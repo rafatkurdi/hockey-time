@@ -44,6 +44,25 @@ export class DefaultService {
     }>(this.api_url + "/api/token", body, options);
   }
 
+  getTokenTemporary(post: { client_id: string; client_secret: string }) {
+    console.log("1");
+    const headers = new HttpHeaders({ "Content-Type": "application/json" });
+    const options = { headers };
+
+    const body = {
+      grant_type: "client_credentials",
+      client_id: post.client_id,
+      client_secret: post.client_secret,
+    };
+
+    return this.http.post<{
+      access_token: string;
+      expires_in: number;
+      token_type: string;
+      scope: any;
+    }>( "https://logiqplayer-test.statistics.datasport.cz/api/token", body, options);
+  }
+
   logOut() {
     this.token = "";
     sessionStorage.removeItem("currentUser");

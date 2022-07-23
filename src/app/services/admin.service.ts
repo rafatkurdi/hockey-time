@@ -102,7 +102,7 @@ export class AdminService {
   getVideoCoachVideoClips(registrationNumber: string) {
     const headers = new HttpHeaders({
       //Authorization: "Bearer " + this.token,
-      Authorization: "Bearer " + "936de4d7723c27fab23a10303fda9f2fade0e1cb",
+      Authorization: "Bearer " + sessionStorage.getItem("tempUser"),
     });
     const options = { headers };
       return this.http.get<any>(
