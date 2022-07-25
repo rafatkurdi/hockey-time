@@ -44,7 +44,7 @@ export class VideoCoachNotesComponent implements OnInit {
     if (this.selected_videoCoachNotes.length != 0) {
       let vasDeleted = false;
       this.selected_videoCoachNotes.forEach((item, index) => {
-        if (item.videoTime == videoCoachNotes.videoTime) {
+        if (item.id == videoCoachNotes.id) {
           this.selected_videoCoachNotes.splice(index, 1);
           vasDeleted = true;
           return;
@@ -53,7 +53,7 @@ export class VideoCoachNotesComponent implements OnInit {
 
       if (this.set_video.length != 0) {
         this.set_video.forEach((video) => {
-          if (video.videoTime + 5 == videoCoachNotes.videoTime) {
+          if (video.videoId  == videoCoachNotes.id) {
             video.selected = false;
             return;
           }
@@ -63,7 +63,7 @@ export class VideoCoachNotesComponent implements OnInit {
       if (!vasDeleted) {
         this.selected_videoCoachNotes.push(videoCoachNotes);
         this.set_video.forEach((video) => {
-          if (video.videoTime + 5 == videoCoachNotes.videoTime) {
+          if (video.videoId == videoCoachNotes.id) {
             video.selected = true;
             return;
           }
@@ -73,7 +73,7 @@ export class VideoCoachNotesComponent implements OnInit {
       this.selected_videoCoachNotes.push(videoCoachNotes);
       if (this.set_video.length != 0) {
         this.set_video.forEach((video) => {
-          if (video.videoTime + 5 == videoCoachNotes.videoTime) {
+          if (video.videoId  == videoCoachNotes.id) {
             video.selected = true;
             return;
           }
@@ -86,7 +86,7 @@ export class VideoCoachNotesComponent implements OnInit {
   isActive(videoCoachNotes: VideoCoachNotes): boolean {
     let isIn = false;
     this.selected_videoCoachNotes.forEach((item, index) => {
-      if (item.videoTime == videoCoachNotes.videoTime) {
+      if (item.id == videoCoachNotes.id) {
         isIn = true;
         return;
       }

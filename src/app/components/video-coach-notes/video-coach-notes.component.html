@@ -1,29 +1,30 @@
-<div class="container widget-item shifts" *ngFor="let videoCoachNote of videoCoachNotes">
-    <div class="flex">
-        <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive(videoCoachNote)}" (click)="selectVideoNote(videoCoachNote)">
-            <div class="inner-circle" *ngIf="isActive(videoCoachNote)">
-
+<div class="video-coach-container" >
+    <div class="container widget-item shifts" *ngFor="let videoCoachNote of videoCoachNotes">
+        <div class="flex">
+            <div class="circle medium-button active-circle" [ngClass]="{'active-circle': isActive(videoCoachNote)}" (click)="selectVideoNote(videoCoachNote)">
+                <div class="inner-circle" *ngIf="isActive(videoCoachNote)">
+    
+                </div>
             </div>
+            <div class="time gap">
+                <div> {{videoCoachNote.time  | formatTime }} </div>
+                <div class="video-notes"> {{videoCoachNote.name }} </div>
+            </div>
+            <!-- <div class="state small-text grey gap">
+                {{shift.gameState}}
+            </div> -->
         </div>
-        <div class="time gap">
-            <div> {{videoCoachNote.videoTime | formatTime}} - {{videoCoachNote.endVideoTime | formatTime}} </div>
-            <div class="video-notes"> {{videoCoachNote.name }} </div>
+        <div class="flex">
+            <div class="hover">
+                <div class="medium-button" [ngClass]="videoCoachNote.type"   (click)="openNotesPopup(videoCoachNote)"></div>
+            </div>
+            <div class="hover" (click)="playOne(videoCoachNote)">
+                <div class="medium-button play_default"></div>
+            </div>
+            
         </div>
-        <!-- <div class="state small-text grey gap">
-            {{shift.gameState}}
-        </div> -->
-    </div>
-    <div class="flex">
-        <div class="hover">
-            <div class="medium-button" [ngClass]="videoCoachNote.type"   (click)="openNotesPopup(videoCoachNote)"></div>
-        </div>
-        <div class="hover" (click)="playOne(videoCoachNote)">
-            <div class="medium-button play_default"></div>
-        </div>
-        
     </div>
 </div>
-
 
 <app-pop-up
     *ngIf="show_pop_up"

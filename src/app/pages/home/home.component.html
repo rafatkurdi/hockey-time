@@ -27,7 +27,7 @@
 </div>
 <div *ngIf="widget != 'home'" [ngStyle]="{'height': widget == 'playlist' ? '343px' : '284px'}" ></div>
     <!-- Player & game info -->
-    <div *ngIf="(!loading || widget != 'home') && widget != 'playlist'">
+    <div *ngIf="(!loading || widget != 'home') && widget != 'playlist'  && widget != 'video_coach_notes'  ">
         <app-player-info
             [no_games]="no_games"
             [selected_game]="selected_game"

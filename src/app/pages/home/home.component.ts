@@ -287,27 +287,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.adminService.getVideoCoachVideoClips(this.player_id)?.subscribe({
       next: (recivedData) => {
         this.VideoCoachNotes = recivedData
-        this.player_toi = this.VideoCoachNotes[0].time;
-        let gameData : OverviewGamesData  = {
-          id : '1',
-          date: 'string',
-          homeTeam: {
-            id: '2',
-            name: '',
-            shortcut:  this.VideoCoachNotes[0].videoId.split('-')[3]
-          },
-          awayTeam: {
-            id: '3',
-            name: '',
-            shortcut:  this.VideoCoachNotes[0].videoId.split('-')[4] ,
-          },
-          score: {
-            home: 0,
-            away: 0,
-            state: ''
-          }
-        };
-        this.selected_game = gameData;
+        // this.player_toi = this.VideoCoachNotes[0].time;
+        // let gameData : OverviewGamesData  = {
+        //   id : '1',
+        //   date: 'string',
+        //   homeTeam: {
+        //     id: '2',
+        //     name: '',
+        //     shortcut:  this.VideoCoachNotes[0].videoId.split('-')[3]
+        //   },
+        //   awayTeam: {
+        //     id: '3',
+        //     name: '',
+        //     shortcut:  this.VideoCoachNotes[0].videoId.split('-')[4] ,
+        //   },
+        //   score: {
+        //     home: 0,
+        //     away: 0,
+        //     state: ''
+        //   }
+        // };
+        // this.selected_game = gameData;
       },
       error: (err) => {
         this.loading = false;
@@ -520,27 +520,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
 
 
-      this.player_toi = this.VideoCoachNotes[0].time;
-      let gameData : OverviewGamesData  = {
-        id : '1',
-        date: 'string',
-        homeTeam: {
-          id: '2',
-          name: '',
-          shortcut:  this.VideoCoachNotes[0].videoId.split('-')[3]
-        },
-        awayTeam: {
-          id: '3',
-          name: '',
-          shortcut:  this.VideoCoachNotes[0].videoId.split('-')[4] ,
-        },
-        score: {
-          home: 0,
-          away: 0,
-          state: ''
-        }
-      };
-      this.selected_game = gameData;
+      // this.player_toi = this.VideoCoachNotes[0].time;
+      // let gameData : OverviewGamesData  = {
+      //   id : '1',
+      //   date: 'string',
+      //   homeTeam: {
+      //     id: '2',
+      //     name: '',
+      //     shortcut:  this.VideoCoachNotes[0].videoId.split('-')[3]
+      //   },
+      //   awayTeam: {
+      //     id: '3',
+      //     name: '',
+      //     shortcut:  this.VideoCoachNotes[0].videoId.split('-')[4] ,
+      //   },
+      //   score: {
+      //     home: 0,
+      //     away: 0,
+      //     state: ''
+      //   }
+      // };
+      // this.selected_game = gameData;
 
 
     });
