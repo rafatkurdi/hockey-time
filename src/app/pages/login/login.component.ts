@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   temporaryLoginForVideo(): void {
     this.defaultService
-    .getTokenTemporary({ client_id: "0820221996", client_secret: "62d6afbb881ee"})
+    .getTokenTemporary({ client_id: "0883641998", client_secret: "62da8d281f021"})
     .subscribe({
       next: (recivedData) => {
         console.log( "Temporary user logged in :",recivedData);
