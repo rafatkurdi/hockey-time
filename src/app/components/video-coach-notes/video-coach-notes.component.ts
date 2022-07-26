@@ -53,7 +53,7 @@ export class VideoCoachNotesComponent implements OnInit {
 
       if (this.set_video.length != 0) {
         this.set_video.forEach((video) => {
-          if (video.videoId  == videoCoachNotes.id) {
+          if (video.id == videoCoachNotes.id) {
             video.selected = false;
             return;
           }
@@ -63,7 +63,7 @@ export class VideoCoachNotesComponent implements OnInit {
       if (!vasDeleted) {
         this.selected_videoCoachNotes.push(videoCoachNotes);
         this.set_video.forEach((video) => {
-          if (video.videoId == videoCoachNotes.id) {
+          if (video.id == videoCoachNotes.id) {
             video.selected = true;
             return;
           }
@@ -73,7 +73,7 @@ export class VideoCoachNotesComponent implements OnInit {
       this.selected_videoCoachNotes.push(videoCoachNotes);
       if (this.set_video.length != 0) {
         this.set_video.forEach((video) => {
-          if (video.videoId  == videoCoachNotes.id) {
+          if (video.id == videoCoachNotes.id) {
             video.selected = true;
             return;
           }
@@ -119,11 +119,12 @@ export class VideoCoachNotesComponent implements OnInit {
   }
 
   setSelectedVideo() {
-    this.videoCoachNotes.forEach((shitf) => {
+    this.videoCoachNotes.forEach((notes) => {
       this.set_video.push({
-        videoTime: shitf.videoTime - 5,
-        videoEndTime: shitf.endVideoTime + 5,
-        videoId : shitf.videoId,
+        id : notes.id,
+        videoTime: notes.videoTime - 5,
+        videoEndTime: notes.endVideoTime + 5,
+        videoId : notes.videoId,
         selected: false,
       });
     });

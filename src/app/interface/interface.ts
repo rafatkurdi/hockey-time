@@ -316,6 +316,7 @@ export interface Pass {
 }
 
 export interface VideToPlay {
+  id?: string;
   videoTime: number;
   videoEndTime: number;
   videoId?: string;
